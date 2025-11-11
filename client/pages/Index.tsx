@@ -1,4 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export default function Index() {
   const [formData, setFormData] = useState({
@@ -6,6 +13,11 @@ export default function Index() {
     phone: "",
     email: "",
   });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const formSectionRef = useRef<HTMLElement>(null);
+  const navigate = useNavigate();
 
   const [countdown, setCountdown] = useState({
     days: 5,
@@ -39,15 +51,56 @@ export default function Index() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const googleFormUrl =
+      "https://docs.google.com/forms/d/e/1FAIpQLScpDxWaeIj18xjSo_woSoqzquWR-Cnp4j1lW3XYJAzG-8xTxA/formResponse";
+    const formDataUrl = new URLSearchParams();
+
+    formDataUrl.append("entry.40703", formData.name); // Họ và tên
+    formDataUrl.append("entry.1002107389", formData.phone); // Số điện thoại
+    formDataUrl.append("entry.804247619", formData.email); // Email
+
+    try {
+      await fetch(googleFormUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formDataUrl.toString(),
+      });
+      // Mở modal thay vì alert
+      setIsModalOpen(true);
+      setIsFormSubmitted(true);
+      setFormData({
+        name: "",
+        phone: "",
+        email: "", // <-- Đã sửa giá trị reset
+      });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Có lỗi xảy ra, vui lòng thử lại.");
+    }
+  };
+
+  const handleGiftCardClick = (url: string) => {
+    if (isFormSubmitted) {
+      if (url.startsWith("http")) {
+        window.open(url, "_blank", "noopener,noreferrer");
+      } else {
+        navigate(url);
+      }
+    } else {
+      formSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
     <div className="min-h-screen bg-white font-['Inter']">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-[#004449] to-[#00ACB8] pt-8 pb-24 lg:pb-32">
+      <section className="relative bg-gradient-to-r from-[#004449] to-[#00ACB8] pt-8 pb-16">
         {/* Navigation */}
         <nav className="container mx-auto px-4 lg:px-12 flex justify-between items-center mb-24 lg:mb-32">
           <img
@@ -128,12 +181,19 @@ export default function Index() {
       </section>
 
       {/* Gift Cards Section */}
-      <section className="container mx-auto px-4 lg:px-12 -mt-16 lg:-mt-24 mb-16 lg:mb-24">
+      <section className="container mx-auto px-4 lg:px-12 mb-16 lg:mb-24 mt-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {/* Card 1 */}
-          <div className="bg-white rounded-xl border border-[#EEE] shadow-lg overflow-hidden">
+          <div
+            className="bg-white rounded-xl border border-[#EEE] shadow-lg overflow-hidden cursor-pointer"
+            onClick={() => handleGiftCardClick("https://drive.google.com/file/d/1uKKmQhAdF6dRcptGrY7IPPv8Sj7nIS6N/view?usp=sharing")}
+          >
             <div className="relative">
-              <div className="w-full h-56 lg:h-64 bg-[#D9D9D9]"></div>
+              <img 
+                src="card1.png" 
+                alt="x2 tài sản trong 6 tháng BÍ MẬT TOP 1% NHÀ ĐẦU TƯ" 
+                className="w-full h-56 lg:h-64 object-cover" 
+              />
               <div className="absolute top-4 right-4 px-4 py-2.5 rounded-md border border-[#00ACB8] bg-white shadow-md">
                 <span className="text-[#00ACB8] text-lg lg:text-xl font-semibold italic">
                   Giá gốc: 5.000.000
@@ -153,9 +213,16 @@ export default function Index() {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white rounded-xl border border-[#EEE] shadow-lg overflow-hidden">
+          <div
+            className="bg-white rounded-xl border border-[#EEE] shadow-lg overflow-hidden cursor-pointer"
+            onClick={() => handleGiftCardClick("https://drive.google.com/file/d/1KAmi-rBxS3zENNeQzS_XBzWkedCXxHu3/view?usp=sharing")}
+          >
             <div className="relative">
-              <div className="w-full h-56 lg:h-64 bg-[#D9D9D9]"></div>
+              <img 
+                src="card2.png" 
+                alt="x2 tài sản trong 6 tháng BÍ MẬT TOP 1% NHÀ ĐẦU TƯ" 
+                className="w-full h-56 lg:h-64 object-cover" 
+              />
               <div className="absolute top-4 right-4 px-4 py-2.5 rounded-md border border-[#00ACB8] bg-white shadow-md">
                 <span className="text-[#00ACB8] text-lg lg:text-xl font-semibold italic">
                   Giá gốc: 3.000.000
@@ -178,9 +245,16 @@ export default function Index() {
 
         {/* Card 3 */}
         <div className="mt-6 lg:mt-8 max-w-6xl mx-auto">
-          <div className="bg-white rounded-xl border border-[#EEE] shadow-lg overflow-hidden lg:max-w-[570px]">
+          <div
+            className="bg-white rounded-xl border border-[#EEE] shadow-lg overflow-hidden lg:max-w-[570px] cursor-pointer"
+            onClick={() => handleGiftCardClick("https://muanha.finful.co/")}
+          >
+            <img 
+              src="card3.png" 
+              alt="Công cụ phân tích tính khả thi của mục tiêu mua nhà" 
+              className="w-full h-56 lg:h-64 object-cover" 
+            />
             <div className="p-5 lg:p-6">
-              <div className="w-full h-56 lg:h-64 bg-[#D9D9D9] mb-6 lg:mb-9"></div>
               <h3 className="text-xl lg:text-2xl font-semibold uppercase mb-4 lg:mb-5">
                 CÔNG CỤ PHÂN TÍCH TÍNH KHẢ THI CỦA MỤC TIÊU MUA NHÀ
               </h3>
@@ -194,87 +268,94 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="w-full h-px bg-[#CFD2DB] mb-16 lg:mb-24"></div>
+      {!isFormSubmitted && (
+        <>
+          {/* Divider */}
+          <div className="w-full h-px bg-[#CFD2DB] mb-16 lg:mb-24"></div>
 
-      {/* Registration Form Section */}
-      <section className="container mx-auto px-4 lg:px-12 mb-16 lg:mb-24">
-        <div className="max-w-3xl mx-auto bg-[#F4FBFB] rounded-xl border border-[#00ACB8] p-8 lg:p-16">
-          <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-3xl lg:text-5xl font-semibold text-[#0D0F2C] mb-1 lg:mb-2 tracking-tight">
-              Đăng ký thông tin để
-            </h2>
-            <h2 className="text-3xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#7FD5DB] via-[#00ACB8] to-[#008993] tracking-tight">
-              MỞ KHOÁ QUÀ TẶNG
-            </h2>
-          </div>
-
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-5 lg:space-y-6 max-w-lg mx-auto"
+          {/* Registration Form Section */}
+          <section
+            ref={formSectionRef}
+            className="container mx-auto px-4 lg:px-12 mb-16 lg:mb-24"
           >
-            <div>
-              <label className="block text-[#5B5B5B] text-base font-semibold mb-2">
-                Họ tên*
-              </label>
-              <input
-                type="text"
-                placeholder="Nhập họ tên"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                className="w-full px-4 py-3 rounded-md border border-[#00ACB8] bg-white text-[15px] placeholder:text-[#B0B0B0] focus:outline-none focus:ring-2 focus:ring-[#00ACB8]"
-                required
-              />
-            </div>
+            <div className="max-w-3xl mx-auto bg-[#F4FBFB] rounded-xl border border-[#00ACB8] p-8 lg:p-16">
+              <div className="text-center mb-12 lg:mb-16">
+                <h2 className="text-3xl lg:text-5xl font-semibold text-[#0D0F2C] mb-1 lg:mb-2 tracking-tight">
+                  Đăng ký thông tin để
+                </h2>
+                <h2 className="text-3xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#7FD5DB] via-[#00ACB8] to-[#008993] tracking-tight">
+                  MỞ KHOÁ QUÀ TẶNG
+                </h2>
+              </div>
 
-            <div>
-              <label className="block text-[#5B5B5B] text-base font-semibold mb-2">
-                Số điện thoại*
-              </label>
-              <input
-                type="tel"
-                placeholder="Nhập số điện thoại"
-                value={formData.phone}
-                onChange={(e) =>
-                  setFormData({ ...formData, phone: e.target.value })
-                }
-                className="w-full px-4 py-3 rounded-md border border-[#00ACB8] bg-white text-[15px] placeholder:text-[#B0B0B0] focus:outline-none focus:ring-2 focus:ring-[#00ACB8]"
-                required
-              />
-            </div>
+              <form
+                onSubmit={handleFormSubmit}
+                className="space-y-5 lg:space-y-6 max-w-lg mx-auto"
+              >
+                <div>
+                  <label className="block text-[#5B5B5B] text-base font-semibold mb-2">
+                    Họ tên*
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Nhập họ tên"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    className="w-full px-4 py-3 rounded-md border border-[#00ACB8] bg-white text-[15px] placeholder:text-[#B0B0B0] focus:outline-none focus:ring-2 focus:ring-[#00ACB8]"
+                    required
+                  />
+                </div>
 
-            <div>
-              <label className="block text-[#5B5B5B] text-base font-semibold mb-2">
-                Email*
-              </label>
-              <input
-                type="email"
-                placeholder="Nhập email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                className="w-full px-4 py-3 rounded-md border border-[#00ACB8] bg-white text-[15px] placeholder:text-[#B0B0B0] focus:outline-none focus:ring-2 focus:ring-[#00ACB8]"
-                required
-              />
-            </div>
+                <div>
+                  <label className="block text-[#5B5B5B] text-base font-semibold mb-2">
+                    Số điện thoại*
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="Nhập số điện thoại"
+                    value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
+                    className="w-full px-4 py-3 rounded-md border border-[#00ACB8] bg-white text-[15px] placeholder:text-[#B0B0B0] focus:outline-none focus:ring-2 focus:ring-[#00ACB8]"
+                    required
+                  />
+                </div>
 
-            <button
-              type="submit"
-              className="w-full bg-[#00ACB8] text-white text-lg font-medium py-4 rounded-lg hover:bg-[#008993] transition-colors"
-            >
-              Gửi thông tin
-            </button>
-          </form>
-        </div>
-      </section>
+                <div>
+                  <label className="block text-[#5B5B5B] text-base font-semibold mb-2">
+                    Email*
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Nhập email"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="w-full px-4 py-3 rounded-md border border-[#00ACB8] bg-white text-[15px] placeholder:text-[#B0B0B0] focus:outline-none focus:ring-2 focus:ring-[#00ACB8]"
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-[#00ACB8] text-white text-lg font-medium py-4 rounded-lg hover:bg-[#008993] transition-colors"
+                >
+                  Gửi thông tin
+                </button>
+              </form>
+            </div>
+          </section>
+        </>
+      )}
 
       {/* CTA Message Section */}
-      <section className="container mx-auto px-4 lg:px-12 mb-16 lg:mb-20">
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="flex flex-wrap justify-center items-center gap-2 lg:gap-3 mb-3">
+      <section className="container mx-auto px-2 lg:px-12 mb-16 lg:mb-20">
+        <div className="text-center max-w-5xl mx-auto">
+          <div className="flex justify-center items-center gap-2 lg:gap-3 mb-3">
             <h2 className="text-3xl lg:text-5xl font-semibold text-[#0D0F2C] opacity-80 tracking-tight">
               Chỉ kiến thức thị trường
             </h2>
@@ -326,14 +407,16 @@ export default function Index() {
             <h2 className="text-4xl lg:text-6xl font-black text-[#3D3E56] mb-4 lg:mb-6">
               SIÊU ƯU ĐÃI
             </h2>
-            <div className="inline-flex items-center justify-center px-6 lg:px-8 py-3 lg:py-4 rounded-full bg-gradient-to-r from-[#00ACB8] via-[#7FD5DB] to-[#00ACB8]">
-              <span className="text-white text-2xl lg:text-3xl font-bold">
-                TRẢI NGHIỆM
-              </span>
+            <div className="flex items-center justify-center gap-4">
+              <div className="inline-flex items-center justify-center px-6 lg:px-8 py-3 lg:py-4 rounded-full bg-gradient-to-r from-[#00ACB8] via-[#7FD5DB] to-[#00ACB8]">
+                <span className="text-white text-2xl lg:text-3xl font-bold">
+                  TRẢI NGHIỆM
+                </span>
+              </div>
+              <p className="text-2xl lg:text-[34px] font-bold text-[#0D0F2C]">
+                TƯ VẤN TÀI CHÍNH 1:1
+              </p>
             </div>
-            <p className="text-2xl lg:text-[34px] font-bold text-[#0D0F2C] mt-4">
-              TƯ VẤN TÀI CHÍNH 1:1
-            </p>
           </div>
 
           {/* Action Buttons */}
@@ -530,6 +613,26 @@ export default function Index() {
           </div>
         </div>
       </footer>
+
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="sm:max-w-md text-center p-8">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-center mb-4">
+              MỞ KHOÁ THÀNH CÔNG!
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex justify-center mb-6">
+            <img
+              src="cracker 1.png"
+              alt="Success"
+              className="w-24 h-24"
+            />
+          </div>
+          <p className="text-center text-lg">
+            Các thông tin và dự báo thị trường đang chờ bạn khám phá!
+          </p>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

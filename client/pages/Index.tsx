@@ -56,14 +56,23 @@ export default function Index() {
             className="h-8 lg:h-9"
           />
           <div className="hidden md:flex items-center gap-8 lg:gap-12 text-white">
-            <a href="#" className="text-sm lg:text-[15px] font-semibold hover:opacity-80 transition">
+            <a
+              href="#"
+              className="text-sm lg:text-[15px] font-semibold hover:opacity-80 transition"
+            >
               Tư vấn Đầu tư
             </a>
-            <a href="#" className="text-sm lg:text-[15px] font-semibold hover:opacity-80 transition">
+            <a
+              href="#"
+              className="text-sm lg:text-[15px] font-semibold hover:opacity-80 transition"
+            >
               Tư vấn Mua nhà
             </a>
             <div className="flex items-center gap-1">
-              <a href="#" className="text-sm lg:text-[15px] font-semibold hover:opacity-80 transition">
+              <a
+                href="#"
+                className="text-sm lg:text-[15px] font-semibold hover:opacity-80 transition"
+              >
                 Giáo dục tài chính
               </a>
               <svg
@@ -136,9 +145,9 @@ export default function Index() {
                 x2 tài sản trong 6 tháng BÍ MẬT TOP 1% NHÀ ĐẦU TƯ
               </h3>
               <p className="text-lg lg:text-[22px] leading-normal">
-                Cơ hội x2 tài sản không đến từ may mắn, mà đến từ phương pháp
-                mà Top 1% luôn giữ kín. Đây không phải là lý thuyết, đây là tấm
-                bản đồ hành động của họ. Cơ hội x2 tài sản ngay hôm nay
+                Cơ hội x2 tài sản không đến từ may mắn, mà đến từ phương pháp mà
+                Top 1% luôn giữ kín. Đây không phải là lý thuyết, đây là tấm bản
+                đồ hành động của họ. Cơ hội x2 tài sản ngay hôm nay
               </p>
             </div>
           </div>
@@ -200,7 +209,10 @@ export default function Index() {
             </h2>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5 lg:space-y-6 max-w-lg mx-auto">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-5 lg:space-y-6 max-w-lg mx-auto"
+          >
             <div>
               <label className="block text-[#5B5B5B] text-base font-semibold mb-2">
                 Họ tên*

@@ -57,6 +57,32 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        finful: {
+          teal: {
+            DEFAULT: "#00ACB8",
+            light: "#7FD5DB",
+            dark: "#008993",
+            darker: "#004449",
+          },
+          yellow: "#FFC344",
+          navy: {
+            DEFAULT: "#0D0F2C",
+            light: "#3D3E56",
+          },
+          dark: {
+            DEFAULT: "#232B35",
+            darker: "#002224",
+          },
+          text: {
+            primary: "#00565C",
+            secondary: "#5B5B5B",
+            placeholder: "#B0B0B0",
+          },
+          bg: {
+            light: "#F4FBFB",
+            lighter: "#E2F6FC",
+          },
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

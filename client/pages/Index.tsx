@@ -199,7 +199,7 @@ export default function Index() {
           {/* Card 1 */}
           <div
             className="bg-white rounded-xl border border-[#EEE] shadow-lg overflow-hidden cursor-pointer"
-            onClick={() => handleGiftCardClick("https://drive.google.com/file/d/1uKKmQhAdF6dRcptGrY7IPPv8Sj7nIS6N/view?usp=sharing")}
+            onClick={() => handleGiftCardClick("https://drive.google.com/file/d/1p8qlB1kzWr3Spz3odYkwTrjg-bp8zxdH/view?usp=sharing")}
           >
             <div className="relative">
               <img 
@@ -228,7 +228,7 @@ export default function Index() {
           {/* Card 2 */}
           <div
             className="bg-white rounded-xl border border-[#EEE] shadow-lg overflow-hidden cursor-pointer"
-            onClick={() => handleGiftCardClick("https://drive.google.com/file/d/1KAmi-rBxS3zENNeQzS_XBzWkedCXxHu3/view?usp=sharing")}
+            onClick={() => handleGiftCardClick("https://drive.google.com/file/d/18kStB1DiwRh2R8wcz4uO-5-utiF5eM0Q/view?usp=sharing")}
           >
             <div className="relative">
               <img 

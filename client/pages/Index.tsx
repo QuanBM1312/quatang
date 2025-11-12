@@ -247,10 +247,7 @@ export default function Index() {
                 LA BÀN NỘI TÂM: Giải Mã DNA Đầu Tư Của Chính Bạn
               </h3>
               <p className="text-lg lg:text-[22px] leading-normal">
-                Thị trường có thể hỗn loạn, nhưng quyết định của bạn thì không.
-                Nắm vững tâm lý, làm chủ hành vi và đầu tư với sự tự tin tuyệt
-                đối. Tải MIỄN PHÍ "La Bàn Nội Tâm" và nhận tấm bản đồ chi tiết
-                về chân dung nhà đầu tư của chính bạn
+              Thị trường có thể hỗn loạn, nhưng quyết định của bạn thì không. Nắm vững tâm lý, làm chủ hành vi và đầu tư với sự tự tin tuyệt đối. Tải và nhận tấm bản đồ chi tiết để đầu tư tối ưu.
               </p>
             </div>
           </div>
@@ -293,10 +290,10 @@ export default function Index() {
           >
             <div className="max-w-3xl mx-auto bg-[#F4FBFB] rounded-xl border border-[#00ACB8] p-8 lg:p-16">
               <div className="text-center mb-12 lg:mb-16">
-                <h2 className="text-3xl lg:text-5xl font-semibold text-[#0D0F2C] mb-1 lg:mb-2 tracking-tight">
+                <h2 className="text-xl lg:text-5xl font-semibold text-[#0D0F2C] mb-1 lg:mb-2 tracking-tight">
                   Đăng ký thông tin để
                 </h2>
-                <h2 className="text-3xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#7FD5DB] via-[#00ACB8] to-[#008993] tracking-tight">
+                <h2 className="text-xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#7FD5DB] via-[#00ACB8] to-[#008993] tracking-tight">
                   MỞ KHOÁ QUÀ TẶNG
                 </h2>
               </div>
@@ -369,14 +366,14 @@ export default function Index() {
       <section className="container mx-auto px-2 lg:px-12 mb-16 lg:mb-20">
         <div className="text-center max-w-5xl mx-auto">
           <div className="flex justify-center items-center gap-2 lg:gap-3 mb-3">
-            <h2 className="text-3xl lg:text-5xl font-semibold text-[#0D0F2C] opacity-80 tracking-tight">
+            <h2 className="text-xl lg:text-5xl font-semibold text-[#0D0F2C] opacity-80 tracking-tight">
               Chỉ kiến thức thị trường
             </h2>
-            <h2 className="text-3xl lg:text-5xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7FD5DB] via-[#00ACB8] to-[#008993] tracking-tight">
+            <h2 className="text-xl lg:text-5xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7FD5DB] via-[#00ACB8] to-[#008993] tracking-tight">
               là chưa đủ!
             </h2>
           </div>
-          <h3 className="text-2xl lg:text-[45px] font-bold text-[#0D0F2C] tracking-tight">
+          <h3 className="text-xl lg:text-[45px] font-bold text-[#0D0F2C] tracking-tight">
             BẠN CẦN SỰ ĐỒNG HÀNH CỦA CHUYÊN GIA!
           </h3>
         </div>
@@ -422,11 +419,11 @@ export default function Index() {
             </h2>
             <div className="flex items-center justify-center gap-4">
               <div className="inline-flex items-center justify-center px-6 lg:px-8 py-3 lg:py-4 rounded-full bg-gradient-to-r from-[#00ACB8] via-[#7FD5DB] to-[#00ACB8]">
-                <span className="text-white text-2xl lg:text-3xl font-bold">
+                <span className="text-white text-md lg:text-3xl font-bold">
                   TRẢI NGHIỆM
                 </span>
               </div>
-              <p className="text-2xl lg:text-[34px] font-bold text-[#0D0F2C]">
+              <p className="text-md lg:text-[34px] font-bold text-[#0D0F2C]">
                 TƯ VẤN TÀI CHÍNH 1:1
               </p>
             </div>

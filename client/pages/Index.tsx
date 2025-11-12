@@ -6,6 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 export default function Index() {
   const [formData, setFormData] = useState({
@@ -110,38 +111,50 @@ export default function Index() {
           />
           <div className="hidden md:flex items-center gap-8 lg:gap-12 text-white">
             <a
-              href="#"
+              href="https://tuvandautu.finful.co/"
               className="text-sm lg:text-[15px] font-semibold hover:opacity-80 transition"
             >
               Tư vấn Đầu tư
             </a>
             <a
-              href="#"
+              href="https://tuvanmuanha.finful.co/"
               className="text-sm lg:text-[15px] font-semibold hover:opacity-80 transition"
             >
               Tư vấn Mua nhà
             </a>
-            <div className="flex items-center gap-1">
-              <a
-                href="#"
-                className="text-sm lg:text-[15px] font-semibold hover:opacity-80 transition"
-              >
-                Giáo dục tài chính
-              </a>
-              <svg
-                className="w-1.5 h-2"
-                viewBox="0 0 9 6"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M8.70899 0.336594C8.89916 0.545319 9 0.820537 9 1.10012C9 1.3797 8.89916 1.65492 8.70899 1.86365L5.24587 5.66345C5.05442 5.87345 4.78578 6 4.4963 6C4.20683 6 3.93823 5.8735 3.74678 5.6635L0.281168 1.86096L0.278722 1.85818C0.0943012 1.64867 -0.00215346 1.37564 3.61916e-05 1.09914C0.00222584 0.822638 0.103012 0.551121 0.291118 0.344728C0.480378 0.137068 0.745186 0.0108831 1.03134 0.00815449C1.31756 0.00542592 1.58477 0.12661 1.77774 0.331099L1.78028 0.3338L4.33793 3.1401C4.42292 3.23335 4.56969 3.23335 4.65468 3.1401L7.20982 0.336546C7.40127 0.126551 7.66991 -7.07934e-08 7.95938 -4.54868e-08C8.24886 -2.01802e-08 8.51754 0.126599 8.70899 0.336594Z"
-                  fill="white"
-                />
-              </svg>
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="group flex items-center gap-1 text-sm lg:text-[15px] font-semibold hover:text-teal transition-colors">
+                  Giáo dục tài chính
+                  <svg
+                    width="9"
+                    height="6"
+                    viewBox="0 0 9 6"
+                    fill="none"
+                    className="mt-1 transition-transform duration-200 group-data-[state=open]:rotate-180"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M8.70899 0.336594C8.89916 0.545319 9 0.820537 9 1.10012C9 1.3797 8.89916 1.65492 8.70899 1.86365L5.24587 5.66345C5.05442 5.87345 4.78578 6 4.4963 6C4.20683 6 3.93823 5.8735 3.74678 5.6635L0.281168 1.86096L0.278722 1.85818C0.0943012 1.64867 -0.00215346 1.37564 3.61916e-05 1.09914C0.00222584 0.822638 0.103012 0.551121 0.291118 0.344728C0.480378 0.137068 0.745186 0.0108831 1.03134 0.00815449C1.31756 0.00542592 1.58477 0.12661 1.77774 0.331099L1.78028 0.3338L4.33793 3.1401C4.42292 3.23335 4.56969 3.23335 4.65468 3.1401L7.20982 0.336546C7.40127 0.126551 7.66991 -7.07934e-08 7.95938 -4.54868e-08C8.24886 -2.01802e-08 8.51754 0.126599 8.70899 0.336594Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-60 text-[#656C86] text-[15px] font-medium mt-2">
+                <DropdownMenuItem className="py-2.5 px-4 focus:bg-teal-50 focus:text-teal cursor-pointer">
+                  <a href="https://app.finful.co/sign-in?redirect_url=https%3A%2F%2Fapp.finful.co%2Fcourse%2F65fb0e91feebb569c2191340%3Ffbclid%3DIwY2xjawGXuQ9leHRuA2FlbQIxMAABHQz4oKhOcoGY-vfIIYNQ0Bi8Grznu_ZpfIf_M0V_mZ5CF8qkodGIA2rAcQ_aem_ZUu0TxwVY7QuOmaOqMPvDA" className="w-full">
+                    Thư viện tài chính cá nhân
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="py-2.5 px-4 focus:bg-teal-50 focus:text-teal cursor-pointer">
+                  <a href="https://education.finful.co/" className="w-full">
+                    Chương trình cho doanh nghiệp
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </nav>
 
@@ -421,10 +434,10 @@ export default function Index() {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 lg:gap-6 mb-12 lg:mb-16">
-            <button className="px-8 py-4 rounded-full bg-[#FFC344] text-[#333] text-xl lg:text-[23px] font-bold shadow-lg hover:shadow-xl transition-shadow">
+            <button onClick={() => window.open("https://tuvanmuanha.finful.co/", "_blank")} className="px-8 py-4 rounded-full bg-[#FFC344] text-[#333] text-xl lg:text-[23px] font-bold shadow-lg hover:shadow-xl transition-shadow">
               Tư vấn mua nhà →
             </button>
-            <button className="px-8 py-4 rounded-full bg-[#FFC344] text-[#333] text-xl lg:text-[23px] font-bold shadow-lg hover:shadow-xl transition-shadow">
+            <button onClick={() => window.open("https://tuvandautu.finful.co/", "_blank")} className="px-8 py-4 rounded-full bg-[#FFC344] text-[#333] text-xl lg:text-[23px] font-bold shadow-lg hover:shadow-xl transition-shadow">
               Tư vấn đầu tư →
             </button>
           </div>
@@ -570,25 +583,25 @@ export default function Index() {
               </h3>
               <div className="space-y-2">
                 <a
-                  href="#"
+                  href="https://tuvanmuanha.finful.co/"
                   className="block text-white text-sm font-medium hover:opacity-80 transition"
                 >
                   Đồng hành và Tư vấn Mua nhà
                 </a>
                 <a
-                  href="#"
+                  href="https://tuvandautu.finful.co/"
                   className="block text-white text-sm font-medium hover:opacity-80 transition"
                 >
                   Đồng hành và Tư vấn Đầu tư
                 </a>
                 <a
-                  href="#"
+                  href="https://app.finful.co/sign-in?redirect_url=https%3A%2F%2Fapp.finful.co%2Fcourse%2F65fb0e91feebb569c2191340%3Ffbclid%3DIwY2xjawGXuQ9leHRuA2FlbQIxMAABHQz4oKhOcoGY-vfIIYNQ0Bi8Grznu_ZpfIf_M0V_mZ5CF8qkodGIA2rAcQ_aem_ZUu0TxwVY7QuOmaOqMPvDA"
                   className="block text-white text-sm font-medium hover:opacity-80 transition"
                 >
                   Thư viện tài chính cá nhân
                 </a>
                 <a
-                  href="#"
+                  href="https://global.finful.co/sign-in?redirect_url=https%3A%2F%2Fglobal.finful.co%2Fcourse%2F654b4b6c919baafbb5c4e975%3Ffbclid%3DIwY2xjawGXuPtleHRuA2FlbQIxMAABHVmJVUh1h6PjYXMWcGrc4Rk4_QmPn22qZimfZLo3aj_a-POutj-ma8d90w_aem_j78gg5nee3mqU6GYcU4ItA"
                   className="block text-white text-sm font-medium hover:opacity-80 transition"
                 >
                   Thư viện phân tích chứng khoán
